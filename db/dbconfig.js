@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
   database:'kindermorgandb',
-  password: ""
+  password: "root"
 });
 
 // connection.connect(function(error){

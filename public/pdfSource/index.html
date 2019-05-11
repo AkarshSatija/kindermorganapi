@@ -11858,29 +11858,11 @@
               <p><strong>Note#3: </strong>If there is any doubt that the excavation area was not property swept repeat the inductive sweep procedure until there is no doubt.</p>
             </div>
           </div>
-          <form #contractForm="ngForm">
+          <form #contractForm="ngForm" class="mt-4">
             <div class="row">
               <div class="col-md-6">
 
                 <ul class="list-unstyled sign">
-                  <!-- <li>Signature of person performing Sweep :
-              <mat-form-field class="example-full-width width_fix">
-                  <input matInput name="name" [(ngModel)]="model.signatureName"  #name="ngModel">
-                </mat-form-field>
-
-
-                var vendorName = req.body.vendorName;
-                var jobName = req.body.jobName;
-                var signaturename = req.body.signatureDate;
-                var signature = req.body.signature;
-                var stationNumberFrom = req.body.stationNumberFrom;
-                var stationNumberTo = req.body.stationNumberTo;
-                var kmSignature = req.body.kmSignature;
-
-
-
-
-          </li> -->
                   <li>Vendor Name :
                     {{ vendorName}}
                   </li>
@@ -11890,7 +11872,7 @@
                   <li>Date & Time :
                     {{signatureDate}}
                   </li>
-                  <li class="bdrs">Signature of the person performing sweep : <img src="{{signature}}">
+                  <li class="bdrs">Signature of the person performing sweep : <br><img src="{{signature}}">
                   </li>
                 </ul>
               </div>
@@ -11902,7 +11884,7 @@
                   <li>Station Number To :
                     {{stationNumberTo}}
                   </li>
-                  <li class="bdrs">KM Representative Signature :   <img src="{{kmSignature}}">
+                  <li class="bdrs">KM Representative Signature :   <br><img src="{{kmSignature}}">
                   </li>
                 </ul>
               </div>

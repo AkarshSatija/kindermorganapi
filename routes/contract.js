@@ -38,7 +38,7 @@ router.post("/save", function(req, res, next) {
   // TODO validate here
   var vendorName = req.body.vendorName;
   var jobName = req.body.jobName;
-  var signaturename = req.body.signatureDate;
+  var signatureDate = new Date(req.body.signatureDate);
   var signature = req.body.signature;
   var stationNumberFrom = req.body.stationNumberFrom;
   var stationNumberTo = req.body.stationNumberTo;
@@ -48,16 +48,18 @@ router.post("/save", function(req, res, next) {
   // var signature = req.body.signature;
   // var signatureDate = req.body.signatureDate;
 
-  pdfid= uuidv1();
+  pdfid = `${jobName}-${signatureDate.toJSON()}`
+
+  var sigDate = db.escape(signatureDate)
 
   console.log('before query', req.body);
-  var sql = `insert into contract(vendorName,jobName,signatureDate,signature,stationNumberFrom,stationNumberTo,kmSignature,CreatedDate,PdfUrl) values ("${vendorName}", "${jobName}",now(),"${signature}","${stationNumberFrom}","${stationNumberTo}","${kmSignature}", now(), "./out/${pdfid}.pdf")`
+  var sql = `insert into contract(vendorName,jobName,signatureDate,signature,stationNumberFrom,stationNumberTo,kmSignature,CreatedDate,PdfUrl) values ("${vendorName}", "${jobName}", ${sigDate} ,"${signature}","${stationNumberFrom}","${stationNumberTo}","${kmSignature}", now(), "./out/${pdfid}.pdf")`
 
   // console.log('query - '+sql)
   // var sql = `insert into contract(signaturename,signature,signatureDate) values ("${signaturename}", "${signature}", now())`
 
   // var sql = `INSERT INTO products (name, sku, price, active, created_at) VALUES ("${name}", "${sku}", "${price}", 1, NOW())`;
-  params=req.body
+  let params = req.body
 
   db.query(sql, function(err, result) {
     if (err) {
@@ -66,7 +68,6 @@ router.post("/save", function(req, res, next) {
     }
     console.log("I am connected to DB", result.insertId);
     pdfGenerator(params, "http://localhost:3000/pdfSource/", `${__dirname}/../public/out/${pdfid}.pdf`)
-    // console.log({ venderName: vendorName,signature: signature, kmSignature:kmSignature })
     res.json({ status: "success", id: result.insertId.toString(), pdf: `./out/${pdfid}.pdf` });
   });
 });
@@ -81,7 +82,6 @@ router.post("/pdf", function(req, res, next) {
   pdf.create(html).toFile([filepath, ], function(err, res) {
     console.log(res.filename);
   });
-
 
   console.log('before query');
 
