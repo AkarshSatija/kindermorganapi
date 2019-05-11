@@ -1,5 +1,6 @@
 var express = require("express");
 var multer = require('multer')
+const uuidv1 = require('uuid/v1');
 
 const pdfGenerator = require('../utils/pdfGenerator.js')
 
@@ -47,8 +48,10 @@ router.post("/save", function(req, res, next) {
   // var signature = req.body.signature;
   // var signatureDate = req.body.signatureDate;
 
+  pdfid= uuidv1();
+
   console.log('before query', req.body);
-  var sql = `insert into contract(vendorName,jobName,signatureDate,signature,stationNumberFrom,stationNumberTo,kmSignature,CreatedDate) values ("${vendorName}", "${jobName}",now(),"${signature}","${stationNumberFrom}","${stationNumberTo}","${kmSignature}", now())`
+  var sql = `insert into contract(vendorName,jobName,signatureDate,signature,stationNumberFrom,stationNumberTo,kmSignature,CreatedDate,PdfUrl) values ("${vendorName}", "${jobName}",now(),"${signature}","${stationNumberFrom}","${stationNumberTo}","${kmSignature}", now(), "./out/${pdfid}.pdf")`
 
   // console.log('query - '+sql)
   // var sql = `insert into contract(signaturename,signature,signatureDate) values ("${signaturename}", "${signature}", now())`
@@ -62,9 +65,9 @@ router.post("/save", function(req, res, next) {
       res.status(500).send({ error: 'Something failed' })
     }
     console.log("I am connected to DB", result.insertId);
-    pdfGenerator(params, "http://localhost:3000/pdfSource/", `${__dirname}/../public/out/${result.insertId}.pdf`)
+    pdfGenerator(params, "http://localhost:3000/pdfSource/", `${__dirname}/../public/out/${pdfid}.pdf`)
     // console.log({ venderName: vendorName,signature: signature, kmSignature:kmSignature })
-    res.json({ status: "success", id: result.insertId.toString(), pdf: `./out/${result.insertId}.pdf` });
+    res.json({ status: "success", id: result.insertId.toString(), pdf: `./out/${pdfid}.pdf` });
   });
 });
 
