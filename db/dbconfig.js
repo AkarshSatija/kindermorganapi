@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 //         console.log('Error');
 //     }
 //     else{
-//         console.log('Connected');  
+//         console.log('Connected');
 //     }
 // });
 
@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
 // let kinderdb = {};
 
 // kinderdb.all=()=>{
-//  return new Promise((resolve,reject)=>{ 
+//  return new Promise((resolve,reject)=>{
 //   connection.query('select * from categories',(err, results)=>{
 //     if(err){
 //         return reject(err);
