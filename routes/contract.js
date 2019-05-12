@@ -1,6 +1,6 @@
 var express = require("express");
 var multer = require('multer')
-const uuidv1 = require('uuid/v1');
+const moment = require('moment')
 
 const pdfGenerator = require('../utils/pdfGenerator.js')
 
@@ -48,7 +48,7 @@ router.post("/save", function(req, res, next) {
   // var signature = req.body.signature;
   // var signatureDate = req.body.signatureDate;
 
-  pdfid = `${jobName}-${signatureDate.toJSON()}`
+  pdfid = `${jobName}-${moment(signatureDate).format("MM-DD-YYYY-HH:MM:SS")}`
 
   var sigDate = db.escape(signatureDate)
 
