@@ -11825,6 +11825,9 @@
         outline: solid 1px
       }
     }
+
+
+.sign li{margin-bottom:20px;}
     </style>
   </head>
 
@@ -11863,28 +11866,30 @@
               <div class="col-md-6">
 
                 <ul class="list-unstyled sign">
-                  <li>Vendor Name :
+                  <li><strong>Vendor Name :</strong>
                     {{ vendorName}}
                   </li>
-                  <li>Job Name :
+                  <li><strong>Job Name :</strong>
                     {{jobName}}
                   </li>
-                  <li>Date & Time :
+                  <li><strong>Date & Time :</strong>
                     {{signatureDate}}
                   </li>
-                  <li class="bdrs">Signature of the person performing sweep : <br><img src="{{signature}}">
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <ul class="list-unstyled sign">
-                  <li>Station Number From :
+		  <li><strong>Station Number From :</strong>
                     {{stationNumberFrom}}
                   </li>
-                  <li>Station Number To :
+                  <li><strong>Station Number To :</strong>
                     {{stationNumberTo}}
                   </li>
-                  <li class="bdrs">KM Representative Signature :   <br><img src="{{kmSignature}}">
+                  
+                </ul>
+              </div>
+              <div class="col-md-1"></div>
+              <div class="col-md-5">
+                <ul class="list-unstyled sign">
+                  <li class="bdrs"><strong>Signature of the person performing sweep :</strong> <br><img src="{{signature}}">
+                  </li>
+                  <li class="bdrs"><strong>KM Representative Signature :</strong>   <br><img src="{{kmSignature}}">
                   </li>
                 </ul>
               </div>
