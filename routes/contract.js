@@ -132,6 +132,9 @@ router.post("/list", function(req, res, next) {
     conditions = conditions + ` and SignatureDate <= '${signatureDateTo}' `;
   }
 
+  conditions = conditions + ` order by CreatedDate desc `;
+  
+
   //console.log("Conditions - " + conditions);
   console.log("before query", req.body);
   var sqlQuery = `SELECT id, vendorName, jobName, signatureDate, stationNumberFrom, stationNumberTo, createdDate, pdfUrl FROM contract`;
