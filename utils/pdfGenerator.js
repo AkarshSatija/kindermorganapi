@@ -9,7 +9,7 @@ const ReadFile = Util.promisify(Fs.readFile)
 async function generatePDF(pagedata, assetPath, destinationPath) {
 	console.log(arguments)
 	pagedata.baseFilePath = assetPath
-	const browser = await puppeteer.launch({ headless: true });
+	const browser = await puppeteer.launch({headless:true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
 	const page = await browser.newPage();
 	await page.setViewport({ width: 1620, height: 926 });
 	// await page.goto(pageURL, { timeout: 3000 });
